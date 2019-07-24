@@ -38,7 +38,7 @@
 						},
 						success: function(result){
 							// ham cho doi ket qua tu server tra ve
-							// an anh loadinf data
+							// an anh loading data
 							$('#loading').hide();
 							// ket qua ben phia server tra ve se duoc luu vao "result"
 							$('#content').html(result);
