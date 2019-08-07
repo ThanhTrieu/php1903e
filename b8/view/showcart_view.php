@@ -24,7 +24,7 @@
 					</thead>
 					<tbody>
 						<?php foreach($cart as $key => $item): ?>
-						<tr>
+						<tr id="row_<?= $item['id_pd']; ?>">
 							<td>
 								<?= $item['id_pd']; ?>
 							</td>
@@ -64,7 +64,39 @@
 				if($.isNumeric(idCart)){
 					// ajax
 					$.ajax({
-						
+						url:"deleteCart.php",
+						type: "POST",
+						data: {id: idCart},
+						success: function(data){
+							data = $.trim(data);
+							if(data === 'OK'){
+								$('#row_'+idCart).hide();
+							}
+						}
+					});
+				}
+			});
+
+			// bat su kien update cart
+			$('button.update').click(function() {
+				let self = $(this);
+				// lay ra duoc so luong tuong ung va id cart tuong ung
+				let qty = $(this).parent().prev().prev().find('input[type=number]').val().trim();
+				let idCart = $(this).parent().next().find('input[class=idCart]').val().trim();
+				//console.log(qty, idCart);
+				if($.isNumeric(qty) && $.isNumeric(idCart)){
+					// ajax
+					$.ajax({
+						url: "updateCart.php",
+						type: "POST",
+						data: {id: idCart, qty: qty},
+						success: function(data){
+							data = $.trim(data);
+							if(data !== 'ERR'){
+								// gan lai money
+								self.parent().prev().text(data);
+							}
+						}
 					});
 				}
 			});
