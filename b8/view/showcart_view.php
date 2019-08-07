@@ -11,7 +11,6 @@
 		<div class="row">
 			<div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
 				<table class="table table-hover table-striped">
-					<caption>Gio hang</caption>
 					<thead>
 						<tr>
 							<th>#</th>
@@ -26,7 +25,9 @@
 					<tbody>
 						<?php foreach($cart as $key => $item): ?>
 						<tr>
-							<td><?= $item['id_pd']; ?></td>
+							<td>
+								<?= $item['id_pd']; ?>
+							</td>
 							<td><?= $item['name_pd']; ?></td>
 							<td>
 								<img src="<?= $item['img_pd']; ?>" alt="" width="120" height="120">
@@ -39,10 +40,11 @@
 								<?= number_format($item['price_pd'] * $item['qty_pd']); ?>
 							</td>
 							<td>
-								<a href="" class="btn btn-primary">update</a>
+								<button class="btn btn-primary update">update</button>								
 							</td>
 							<td>
-								<a href="#" class="btn btn-danger">Delete</a>
+								<button class="btn btn-danger delete">Delete</button>
+								<input type="hidden" class="idCart" value="<?= $item['id_pd']; ?>">
 							</td>
 						</tr>
 						<?php endforeach; ?>
@@ -51,5 +53,23 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js
+" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+			// bat su kien delete cart
+			$('button.delete').click(function() {
+				//alert('delete');
+				let idCart = $(this).next().val().trim();
+				if($.isNumeric(idCart)){
+					// ajax
+					$.ajax({
+						
+					});
+				}
+			});
+		});
+	</script>
+
 </body>
 </html>
